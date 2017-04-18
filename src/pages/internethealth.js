@@ -21,7 +21,8 @@ var Science = React.createClass({
     return (
       <div className="internethealth-page">
         <MadLib
-          header="placeholder"
+          header="A healthy Internet is..."
+          placeholder="share your thoughts"
           channel={channel}
           sheets={{
             entry: "822808207",
@@ -33,7 +34,7 @@ var Science = React.createClass({
             }
           }}
         >
-          Placeholder
+          Thanks for sharing. mozilla made this because we :heart: the internet. Help keep it healthy by <a href="">sharing</a> with your friends. Learn more about internet health <a href="">here</a>.
         </MadLib>
       </div>
     );
