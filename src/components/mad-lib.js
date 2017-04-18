@@ -167,7 +167,7 @@ var MadLib = React.createClass({
       <div>
         <div className="header-container">
           <h1>{this.props.header}</h1>
-          <input onKeyDown={this.keyDown} ref={(input) => { this.inputElement = input; }} maxLength="50" className="input" type="text" placeholder="share your idea"></input>
+          <input onKeyDown={this.keyDown} ref={(input) => { this.inputElement = input; }} maxLength="50" className="input" type="text" placeholder={this.props.placeholder}></input>
         </div>
         <div ref={(input) => { this.outputContainer = input; }} className="output-container"></div>
         <div className={contextClassName}>
