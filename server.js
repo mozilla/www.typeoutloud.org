@@ -62,7 +62,7 @@ app.post('/api/sheets/read/', routes.sheets.read);
 app.use(express.static('public'));
 
 app.get('*', function (request, response) {
-  response.sendfile(path.join(__dirname, '/public/index.html'));
+  response.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 app.listen(process.env.PORT, function () {
