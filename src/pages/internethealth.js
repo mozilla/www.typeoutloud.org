@@ -34,7 +34,7 @@ var Science = React.createClass({
             }
           }}
         >
-          Thanks for sharing. mozilla made this because we :heart: the internet. Help keep it healthy by <a href="">sharing</a> with your friends. Learn more about internet health <a href="">here</a>.
+          Thanks for sharing. <span className="logo">mozilla</span> made this because we <img className="heart" src="/assets/images/white-heart.png"/> the internet. Help keep it healthy by <a href="">sharing</a> with your friends. Learn more about internet health <a href="https://internethealthreport.org/">here</a>.
         </MadLib>
       </div>
     );

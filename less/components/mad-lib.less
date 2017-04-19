@@ -7,6 +7,7 @@
 p {
   font-size: 2rem;
   line-height: 2.5rem;
+  margin: 0;
 }
 
 h1 {
@@ -56,6 +57,7 @@ h1, .output-container div {
   color: #fff;
   padding: 1.25rem;
   display: block;
+  width: 100%;
 }
 
 input::-webkit-input-placeholder {
@@ -84,7 +86,7 @@ button:focus {
 /*output container*/
 
 .output-container {
-  padding-top: 240px;
+  padding-top: 244px;
   width: 100%;
   overflow: hidden;
 }
@@ -108,15 +110,11 @@ div.thankyou {
   width: 100%;
   text-align: center;
   transition: bottom 1s ease;
-  height: 300px;
+  padding: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   bottom: 0;
-}
-
-div.thankyou p {
-  width: 70%;
 }
 
 div.thankyou.hidden {
@@ -130,26 +128,29 @@ div.thankyou a {
 }
 
 div.thankyou a:hover {
-  background: #F890FD;
+  background: #FFFFFF;
   color: #000;
   text-decoration: none;
 }
 
-.close {
-  padding: .5rem;
-  position: absolute;
-  top: 1.375rem;
-  right: 1.375rem;
-  cursor: pointer;
+.logo {
+  background: #FFFFFF;
+  color: #000;
+  padding: 0px 0.25rem;
 }
 
-.logo {
-  height: 2rem;
-  margin-bottom: -.5rem;
+.close {
+  padding: 1rem;
+  position: absolute;
+  top: .6rem;
+  right: .6rem;
+  cursor: pointer;
+  height: 3.5rem;
+  width: 3.5rem;
 }
 
 .heart {
-  width: 3.5%;
+  height: 1.4rem;
 }
 /*waiting animation*/
 
@@ -185,25 +186,13 @@ div.thankyou a:hover {
 /*responsive design*/
 
 @media screen and (max-width: 700px) {
-  html {
-    font-size: 6px;
-  }
-  p {
-    font-size: 3.5rem;
-    line-height: 4.3rem;
-  }
   .output-container {
-    top: 90px;
-  }
-  div.thankyou p {
-    width: 85%;
-  }
-  .logo {
-    height: 3.5rem;
-    margin-bottom: -.8rem;
-  }
-  .heart {
-    width: 6%;
+    padding-top: 153px;
   }
 }
 
+@media screen and (max-width: 480px) {
+  .output-container {
+    padding-top: 107px;
+  }
+}
