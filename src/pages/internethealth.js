@@ -22,6 +22,7 @@ var Science = React.createClass({
       <div className="internethealth-page">
         <MadLib
           pageTitle="internethealth"
+          shareProgress="https://share.mozilla.org/352/180435"
           header="A healthy Internet is..."
           placeholder="share your thoughts"
           channel={channel}
@@ -35,7 +36,7 @@ var Science = React.createClass({
             }
           }}
         >
-          Thanks for sharing. <span className="logo">mozilla</span> made this because we <img className="heart" src="/assets/images/white-heart.png"/> the internet. Help keep it healthy by <a href="">sharing</a> with your friends. Learn more about internet health <a href="https://internethealthreport.org/">here</a>.
+          Thanks for sharing. <span className="logo">mozilla</span> made this because we <img className="heart" src="/assets/images/white-heart.png"/> the internet. Help keep it healthy by <a href="https://share.mozilla.org/352/180435">sharing</a> with your friends. Learn more about internet health <a href="https://internethealthreport.org/">here</a>.
         </MadLib>
       </div>
     );

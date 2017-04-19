@@ -170,7 +170,7 @@ var MadLib = React.createClass({
           <h1>{this.props.header}</h1>
           <input onKeyDown={this.keyDown} ref={(input) => { this.inputElement = input; }} maxLength="50" className="input" type="text" placeholder={this.props.placeholder}></input>
           <div className="share-container">
-            <a href="">
+            <a href={this.props.shareProgress}>
               <img src="./assets/images/share-icon.png"/>
             </a>
           </div>
