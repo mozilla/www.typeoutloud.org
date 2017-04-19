@@ -21,6 +21,7 @@ var Science = React.createClass({
     return (
       <div className="internethealth-page">
         <MadLib
+          pageTitle="internethealth"
           header="A healthy Internet is..."
           placeholder="share your thoughts"
           channel={channel}

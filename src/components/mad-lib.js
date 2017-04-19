@@ -38,6 +38,7 @@ var MadLib = React.createClass({
     var channel = this.props.channel;
     var writeSheet = this.props.sheets.write[channel];
     var readSheet = this.props.sheets.read[channel];
+    document.title = "typeoutloud.org | " + this.props.pageTitle;
 
     return {
       contextClosed: false,
