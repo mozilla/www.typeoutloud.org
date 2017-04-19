@@ -13,8 +13,7 @@ p {
 
 h1 {
   background: #fff;
-  white-space: nowrap;
-  margin: 0;
+  margin: 0 7rem 0 0;
   font-weight: 500;
 }
 
@@ -82,6 +81,25 @@ select:focus,
 textarea:focus,
 button:focus {
   outline: none;
+}
+
+.share-container {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  a {
+    display: block;
+    padding: 1.5rem;
+    background: rgba(0,0,0, 0.37);
+    &:hover {
+      background: #B0B3E7;
+    }
+    img {
+      height: 4rem;
+      display: block;
+    }
+  }
 }
 
 /*output container*/
@@ -186,14 +204,20 @@ div.thankyou a:hover {
 
 /*responsive design*/
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 880px) {
   .output-container {
     padding-top: 153px;
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 552px) {
   .output-container {
     padding-top: 107px;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  .output-container {
+    padding-top: 147px;;
   }
 }
