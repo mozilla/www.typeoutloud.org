@@ -1,5 +1,7 @@
 import React  from 'react';
 
+import reactGA from 'react-ga';
+
 function addToSheets(data, callback) {
   var http = new XMLHttpRequest();
   var url = "/api/sheets/add/";

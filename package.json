@@ -43,6 +43,7 @@
     "profam": "2.0.2",
     "react": "15.2.1",
     "react-dom": "15.2.1",
+    "react-ga": "2.1.1",
     "react-router": "2.0.0",
     "request": "2.81.0",
     "webpack": "1.12.9",

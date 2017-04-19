@@ -32,7 +32,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': JSON.stringify({
         APPLICATION_URI: process.env.APPLICATION_URI,
-        DISABLE_INPUT: process.env.DISABLE_INPUT
+        DISABLE_INPUT: process.env.DISABLE_INPUT,
+        GA_TRACKING_ID: process.env.GA_TRACKING_ID
       })
     }),
     //new webpack.optimize.UglifyJsPlugin(),
