@@ -168,6 +168,11 @@ var MadLib = React.createClass({
         <div className="header-container">
           <h1>{this.props.header}</h1>
           <input onKeyDown={this.keyDown} ref={(input) => { this.inputElement = input; }} maxLength="50" className="input" type="text" placeholder={this.props.placeholder}></input>
+          <div className="share-container">
+            <a href="">
+              <img src="./assets/images/share-icon.png"/>
+            </a>
+          </div>
         </div>
         <div ref={(input) => { this.outputContainer = input; }} className="output-container"></div>
         <div className={contextClassName}>
