@@ -33,4 +33,3 @@ $> cp sample.env .env
 ```
 $> npm start
 ```
->>>>>>> 23ecc61... Initial repo files.
