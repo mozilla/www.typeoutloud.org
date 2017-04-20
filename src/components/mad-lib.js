@@ -1,38 +1,6 @@
 import React  from 'react';
 import reactGA from 'react-ga';
-
-function addToSheets(data, callback) {
-  var http = new XMLHttpRequest();
-  var url = "/api/sheets/add/";
-  callback = callback || function() {};
-
-  http.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      callback("success");
-    }
-  };
-
-  http.open("POST", url, true);
-  http.setRequestHeader("Content-type", "application/json");
-  http.send(JSON.stringify(data));
-}
-
-function readFromSheets(data, callback) {
-  var http = new XMLHttpRequest();
-  var url = "/api/sheets/read/";
-  callback = callback || function() {};
-
-  http.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      var result = JSON.parse(this.responseText);
-      callback(result);
-    }
-  };
-
-  http.open("POST", url, true);
-  http.setRequestHeader("Content-type", "application/json");
-  http.send(JSON.stringify(data));
-}
+import sheets from '../lib/sheets.js';
 
 var MadLib = React.createClass({
   getInitialState: function() {
@@ -51,7 +19,10 @@ var MadLib = React.createClass({
       previousGuid: "",
       timeout: window.setTimeout(this.updateOutputTimeout),
       highestScroll: 0,
-      scrollPercentages: [0, 25, 50, 75, 100]
+      scrollPercentages: [0, 25, 50, 75, 100],
+      waiting: false,
+      rows: [],
+      tempField: ""
     };
   },
   updateOutputTimeout: function() {
@@ -63,9 +34,7 @@ var MadLib = React.createClass({
   },
   updateOutput: function(callback) {
     callback = callback || function() {};
-    var cacheElement = document.createElement("div");
-    var waitingElement;
-    readFromSheets({
+    sheets.read({
       channel: this.state.channel,
       sheet: this.state.readSheet
     }, (data) => {
@@ -73,43 +42,14 @@ var MadLib = React.createClass({
       var rows = data.rows;
       var guid = data.guid;
       if (guid !== this.state.previousGuid && !this.state.paused) {
-        var waitingElement = document.querySelector(".waiting");
-
-        if (waitingElement) {
-          cacheElement.appendChild(waitingElement);
-        }
-        rows.forEach(function(row){
-          var rowElement = document.createElement('div');
-          rowElement.textContent = row.field;
-          cacheElement.appendChild(rowElement);
-        });
-        this.outputContainer.innerHTML = cacheElement.innerHTML;
         this.setState({
-          previousGuid: guid
+          previousGuid: guid,
+          rows,
+          tempField: ""
         });
       }
       callback();
     });
-  },
-  waiting: function(on) {
-    if (on) {
-      this.inputElement.disabled = true;
-      var rowElement = document.createElement('div');
-      var firstChild = this.outputContainer.firstChild;
-      rowElement.innerHTML = "<span>.</span><span>.</span><span>.</span>";
-      rowElement.classList.add("waiting");
-      if (!firstChild) {
-        this.outputContainer.appendChild(rowElement);
-      } else {
-        this.outputContainer.insertBefore(rowElement, this.outputContainer.firstChild);
-      }
-    } else {
-      this.inputElement.disabled = false;
-      var waitingElement = document.querySelector(".waiting");
-      if (waitingElement && waitingElement.parentNode) {
-        waitingElement.parentNode.removeChild(waitingElement);
-      }
-    }
   },
   keyDown: function(e) {
     var value = this.inputElement.value.trim().slice(0, 50);
@@ -121,29 +61,22 @@ var MadLib = React.createClass({
         label: value
       });
 
-      this.waiting(true);
       this.inputElement.value = '';
       clearTimeout(this.state.timeOut);
       this.setState({
-        timeOut: null
+        timeOut: null,
+        waiting: true
       }, () => {
         this.updateOutput(() => {
-          addToSheets({
+          sheets.write({
             field: value,
             sheet: this.state.writeSheet,
             entry: this.state.entry
           }, () => {
-            this.waiting(false);
-            var rowElement = document.createElement('div');
-            var firstChild = this.outputContainer.firstChild;
-            rowElement.textContent = value;
-            if (!firstChild) {
-              this.outputContainer.appendChild(rowElement);
-            } else {
-              this.outputContainer.insertBefore(rowElement, this.outputContainer.firstChild);
-            }
             this.setState({
-              timeOut: window.setTimeout(this.updateOutputTimeout, 4000)
+              timeOut: window.setTimeout(this.updateOutputTimeout, 4000),
+              tempField: value,
+              waiting: false
             });
           });
         });
@@ -202,6 +135,34 @@ var MadLib = React.createClass({
       contextClosed: true
     });
   },
+  renderRows: function() {
+    var tempElement = null;
+    if (this.state.waiting) {
+      tempElement = (
+        <div className="waiting">
+          <span>.</span>
+          <span>.</span>
+          <span>.</span>
+        </div>
+      );
+    } else if (this.state.tempField) {
+      tempElement = (
+        <div>{this.state.tempField}</div>
+      );
+    }
+    return (
+      <div className="output-container">
+        {tempElement}
+        {
+          this.state.rows.map(function(row, index) {
+            return (
+              <div key={"row-" + index}>{row.field}</div>
+            );
+          })
+        }
+      </div>
+    );
+  },
   render: function() {
     var contextClassName = "thankyou";
     if (this.state.contextClosed) {
@@ -211,14 +172,14 @@ var MadLib = React.createClass({
       <div>
         <div className="header-container">
           <h1>{this.props.header}</h1>
-          <input onKeyDown={this.keyDown} ref={(input) => { this.inputElement = input; }} maxLength="50" className="input" type="text" placeholder={this.props.placeholder}></input>
+          <input disabled={this.state.waiting ? "disabled" : false} onKeyDown={this.keyDown} ref={(input) => { this.inputElement = input; }} maxLength="50" className="input" type="text" placeholder={this.props.placeholder}></input>
           <div className="share-container">
             <a href={this.props.shareProgress} onClick={this.shareProgressClick}>
               <img src="./assets/images/share-icon.png"/>
             </a>
           </div>
         </div>
-        <div ref={(input) => { this.outputContainer = input; }} className="output-container"></div>
+        {this.renderRows()}
         <div className={contextClassName}>
           <img onClick={this.closeContext} className="close" src="./assets/images/close.png" alt="close icon"/>
           <p>
