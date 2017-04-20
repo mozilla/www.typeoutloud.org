@@ -1,8 +1,15 @@
 import React  from 'react';
-
 import MadLib from '../components/mad-lib.js';
+import reactGA from 'react-ga';
 
 var Science = React.createClass({
+  shareProgressClick: function() {
+    reactGA.event({
+      category: "Social",
+      action: "Clicked on link share",
+      label: "ShareProgress"
+    });
+  },
   render: function() {
     var search = location.search;
     var channel = "email";
@@ -19,7 +26,7 @@ var Science = React.createClass({
       });
     }
     return (
-      <div className="internethealth-page">
+      <div className="internethealth-page page">
         <MadLib
           pageTitle="internethealth"
           shareProgress="https://share.mozilla.org/352/180435"
@@ -36,7 +43,7 @@ var Science = React.createClass({
             }
           }}
         >
-          Thanks for sharing. <span className="logo">mozilla</span> made this because we <img className="heart" src="/assets/images/white-heart.png"/> the internet. Help keep it healthy by <a href="https://share.mozilla.org/352/180435">sharing</a> with your friends. Learn more about internet health <a href="https://internethealthreport.org/">here</a>.
+          Thanks for sharing. <span className="logo">mozilla</span> made this because we <img className="heart" src="/assets/images/white-heart.png"/> the internet. Help keep it healthy by <a href="https://share.mozilla.org/352/180435">sharing</a> with your friends. Learn more about internet health <a href="https://internethealthreport.org/" onClick={this.shareProgressClick}>here</a>.
         </MadLib>
       </div>
     );

@@ -1,5 +1,4 @@
 import React  from 'react';
-
 import reactGA from 'react-ga';
 
 function addToSheets(data, callback) {
@@ -50,7 +49,9 @@ var MadLib = React.createClass({
       readSheet: readSheet,
       entry: this.props.sheets.entry,
       previousGuid: "",
-      timeout: window.setTimeout(this.updateOutputTimeout)
+      timeout: window.setTimeout(this.updateOutputTimeout),
+      highestScroll: 0,
+      scrollPercentages: [0, 25, 50, 75, 100]
     };
   },
   updateOutputTimeout: function() {
@@ -114,6 +115,12 @@ var MadLib = React.createClass({
     var value = this.inputElement.value.trim().slice(0, 50);
     if(value && e.keyCode === 13) {
 
+      reactGA.event({
+        category: "User Flow",
+        action: "Submitted madlib",
+        label: value
+      });
+
       this.waiting(true);
       this.inputElement.value = '';
       clearTimeout(this.state.timeOut);
@@ -143,6 +150,30 @@ var MadLib = React.createClass({
       });
     }
   },
+  shareProgressClick: function() {
+    reactGA.event({
+      category: "Social",
+      action: "Clicked on icon share",
+      label: "ShareProgress"
+    });
+  },
+  trackScroll: function(scrollY) {
+    var scrollMax = document.body.offsetHeight - window.innerHeight;
+    var scrollPercent = scrollY / scrollMax * 100;
+    var nextScrollPercent;
+    while (scrollPercent >= this.state.scrollPercentages[0]) {
+      nextScrollPercent = this.state.scrollPercentages.shift();
+      reactGA.event({
+        category: "User Flow",
+        action: "User scrolled madlib",
+        label: nextScrollPercent + "%"
+      });
+    }
+
+    this.setState({
+      highestScroll: scrollY
+    });
+  },
   componentDidMount: function() {
     this.inputElement.focus();
     window.addEventListener("scroll", () => {
@@ -154,9 +185,19 @@ var MadLib = React.createClass({
       this.setState({
         paused
       });
+
+      if (scrollY > this.state.highestScroll) {
+        this.trackScroll(scrollY);
+      }
     });
   },
   closeContext: function() {
+    reactGA.event({
+      category: "User Flow",
+      action: "Context menu closed",
+      label: ""
+    });
+
     this.setState({
       contextClosed: true
     });
@@ -172,7 +213,7 @@ var MadLib = React.createClass({
           <h1>{this.props.header}</h1>
           <input onKeyDown={this.keyDown} ref={(input) => { this.inputElement = input; }} maxLength="50" className="input" type="text" placeholder={this.props.placeholder}></input>
           <div className="share-container">
-            <a href={this.props.shareProgress}>
+            <a href={this.props.shareProgress} onClick={this.shareProgressClick}>
               <img src="./assets/images/share-icon.png"/>
             </a>
           </div>
