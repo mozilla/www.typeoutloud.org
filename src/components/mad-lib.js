@@ -24,6 +24,7 @@ var MadLib = React.createClass({
 
     return {
       contextClosed: true,
+      contextFired: false,
       paused: false,
       channel,
       writeSheet: writeSheet,
@@ -87,11 +88,16 @@ var MadLib = React.createClass({
             sheet: this.state.writeSheet,
             entry: this.state.entry
           }, () => {
+            var contextClosed = false;
+            if (this.state.contextFired) {
+              contextClosed = true;
+            }
             this.setState({
               timeOut: window.setTimeout(this.updateOutputTimeout, 4000),
               tempField: value,
               waiting: false,
-              contextClosed: false
+              contextClosed,
+              contextFired: true
             });
           });
         });
