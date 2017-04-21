@@ -8,7 +8,7 @@ var routes = (
   <Route path="/">
     <IndexRedirect to='internethealth'/>
     <Route path='internethealth' component={require('./pages/internethealth.js')}/>
-    <Route path='abort' component={require('./pages/abort.js')}/>
+    <Route path='internethealth-abort' component={require('./pages/internethealth-abort.js')}/>
     <Redirect from="*" to="/" />
   </Route>
 );

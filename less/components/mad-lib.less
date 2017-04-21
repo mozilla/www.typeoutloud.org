@@ -117,6 +117,10 @@ button:focus {
   max-width: 100%;
   clear: both;
   float: left;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 /*modal*/
@@ -202,6 +206,23 @@ div.thankyou a:hover {
   }
 }
 
+/*highlight*/
+
+.highlight {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    margin: 0;
+  }
+}
+
 /*responsive design*/
 
 @media screen and (max-width: 880px) {
@@ -212,12 +233,12 @@ div.thankyou a:hover {
 
 @media screen and (max-width: 552px) {
   .output-container {
-    padding-top: 107px;
+    padding-top: 122px;
   }
 }
 
 @media screen and (max-width: 384px) {
   .output-container {
-    padding-top: 147px;;
+    padding-top: 168px;
   }
 }
