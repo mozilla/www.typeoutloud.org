@@ -30,7 +30,7 @@ var Science = React.createClass({
         <MadLib
           pageTitle="internethealth"
           shareProgress="https://share.mozilla.org/352/180435"
-          header="A healthy Internet is..."
+          header="A healthy Internet is ..."
           placeholder="share your thoughts"
           channel={channel}
           sheets={{
