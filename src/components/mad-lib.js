@@ -242,13 +242,13 @@ var MadLib = React.createClass({
           <input disabled={this.state.waiting ? "disabled" : false} onKeyDown={this.keyDown} ref={(input) => { this.inputElement = input; }} maxLength="50" className="input" type="text" placeholder={this.props.placeholder}></input>
           <div className="share-container">
             <a href={this.props.shareProgress} onClick={this.shareProgressClick}>
-              <img src="./assets/images/share-icon.png"/>
+              <i className="fa fa-share-alt fa-4x" aria-hidden="true"></i>
             </a>
           </div>
         </div>
         {this.renderRows()}
         <div className={contextClassName}>
-          <img onClick={this.closeContext} className="close" src="./assets/images/close.png" alt="close icon"/>
+          <i onClick={this.closeContext} className="fa fa-times fa-3x close" aria-hidden="true"></i>
           <p>
             {this.props.children}
           </p>

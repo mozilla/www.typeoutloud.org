@@ -43,7 +43,7 @@ var Science = React.createClass({
             }
           }}
         >
-          Thanks for sharing. <span className="logo">mozilla</span> made this because we <img className="heart" src="/assets/images/white-heart.png"/> the internet. Help keep it healthy by <a href="https://share.mozilla.org/352/180435">sharing</a> with your friends. Learn more about internet health <a href="https://internethealthreport.org/" onClick={this.shareProgressClick}>here</a>.
+          Thanks for sharing. <span className="logo">mozilla</span> made this because we <i className="fa fa-heart fa-1x" aria-hidden="true"></i> the internet. Help keep it healthy by <a href="https://share.mozilla.org/352/180435">sharing</a> with your friends. Learn more about internet health <a href="https://internethealthreport.org/" onClick={this.shareProgressClick}>here</a>.
         </MadLib>
       </div>
     );

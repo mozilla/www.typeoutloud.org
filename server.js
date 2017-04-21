@@ -35,8 +35,8 @@ app.use(helmet.contentSecurityPolicy({
     scriptSrc: ["'self'", "https://*.shpg.org/", "https://www.google-analytics.com/"],
     connectSrc:["'self'"],
     childSrc:["'self'"],
-    styleSrc:["'self'"],
-    fontSrc:["'self'"],
+    styleSrc:["'self'", "https://maxcdn.bootstrapcdn.com/"],
+    fontSrc:["'self'", "https://maxcdn.bootstrapcdn.com/"],
     imgSrc:["'self'", "https://www.google-analytics.com", "https://*.shpg.org/"],
     frameAncestors: ["'none'"]
   }
