@@ -9,8 +9,21 @@ var MadLib = React.createClass({
     var readSheet = this.props.sheets.read[channel];
     document.title = "typeoutloud.org | " + this.props.pageTitle;
 
+    var search = location.search;
+    var highlight = "";
+    if (search) {
+      search = search.replace("?", "");
+      search = search.split("&");
+      search.forEach(function(item) {
+        item = item.split("=");
+        if (item[0] === "highlight") {
+          highlight = item[1];
+        }
+      });
+    }
+
     return {
-      contextClosed: false,
+      contextClosed: true,
       paused: false,
       channel,
       writeSheet: writeSheet,
@@ -22,7 +35,8 @@ var MadLib = React.createClass({
       scrollPercentages: [0, 25, 50, 75, 100],
       waiting: false,
       rows: [],
-      tempField: ""
+      tempField: "",
+      highlight
     };
   },
   updateOutputTimeout: function() {
@@ -76,7 +90,8 @@ var MadLib = React.createClass({
             this.setState({
               timeOut: window.setTimeout(this.updateOutputTimeout, 4000),
               tempField: value,
-              waiting: false
+              waiting: false,
+              contextClosed: false
             });
           });
         });
@@ -137,6 +152,14 @@ var MadLib = React.createClass({
   },
   renderRows: function() {
     var tempElement = null;
+    var href = location.origin + location.pathname;
+    var search = location.search;
+    if (search) {
+      href += search + "&";
+    } else {
+      href += "?";
+    }
+    href += "highlight=";
     if (this.state.waiting) {
       tempElement = (
         <div className="waiting">
@@ -147,7 +170,11 @@ var MadLib = React.createClass({
       );
     } else if (this.state.tempField) {
       tempElement = (
-        <div>{this.state.tempField}</div>
+        <div>
+          <a href={href + this.state.tempField}>
+            {this.state.tempField}
+          </a>
+        </div>
       );
     }
     return (
@@ -156,12 +183,46 @@ var MadLib = React.createClass({
         {
           this.state.rows.map(function(row, index) {
             return (
-              <div key={"row-" + index}>{row.field}</div>
+              <div key={"row-" + index}>
+                <a href={href + row.field}>{row.field}</a>
+              </div>
             );
           })
         }
       </div>
     );
+  },
+  closeHighlight: function() {
+    var href = location.origin + location.pathname;
+    var search = location.search;
+    if (search) {
+      search = search.replace("?", "");
+      search = search.split("&");
+      if (search.length > 1) {
+        href += "?";
+      }
+      search.forEach(function(item, index) {
+        item = item.split("=");
+        if (item[0] !== "highlight") {
+          href += item[0] + "=" + item[1];
+          if (index < search.length-2) {
+            href += "&";
+          }
+        }
+      });
+    }
+    location.href = href;
+  },
+  renderHighlight: function() {
+    if (!this.state.highlight) {
+      return null;
+    } else {
+      return (
+        <div onClick={this.closeHighlight} className="highlight">
+          <h1 onClick={function(e) {e.stopPropagation();}}>{this.props.header} {decodeURI(this.state.highlight)}</h1>
+        </div>
+      );
+    }
   },
   render: function() {
     var contextClassName = "thankyou";
@@ -186,6 +247,7 @@ var MadLib = React.createClass({
             {this.props.children}
           </p>
         </div>
+        {this.renderHighlight()}
       </div>
     );
   }
