@@ -57,7 +57,7 @@ console.log(field);
       } else {
         rows = results.map(function(obj) {
           var filteredWord = profanity.run(obj.field.toLowerCase())[0]['asterisks-full'];
-          if (filteredWord !== obj.field.toLowerCase()) {
+          if (obj.whitelist !== "allow" && filteredWord !== obj.field.toLowerCase()) {
             filteredWord = 'unicorns';
           } else {
             filteredWord = obj.field;
