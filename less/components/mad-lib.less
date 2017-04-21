@@ -5,21 +5,45 @@
 }
 
 p {
-  font-size: 2.5rem;
-  line-height: 3rem;
+  font-size: 3rem;
+  line-height: 4rem;
   margin: 0;
-  max-width: 1100px;
+  max-width: 900px;
+  .heart {
+    height: 2.1rem;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  p {
+    font-size: 4rem;
+    line-height: 5rem;
+    .heart {
+      height: 2.7rem;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  p {
+    font-size: 5rem;
+    line-height: 6rem;
+    .heart {
+      height: 3.2rem;
+    }
+  }
 }
 
 h1 {
   background: #fff;
-  margin: 0 7rem 0 0;
+  margin: 0 7.8rem 0 0;
   font-weight: 500;
 }
 
 h1, .output-container div {
-  font-size: 5rem;
-  padding: 0.3125rem 0.625rem 0.9375rem;
+  font-size: 5.5rem;
+  line-height: 6.5rem;
+  padding: 0.3125rem 1.5rem 0.9375rem;
   display: inline-block;
 }
 
@@ -55,7 +79,7 @@ h1, .output-container div {
   font-size: 5rem;
   font-family: "ZillaSlab-Light", "Arvo","Fira Sans", "Helvetica Neue", "Arial", sans-serif;
   color: #fff;
-  padding: 1.25rem .625rem;
+  padding: 1.25rem 1.5rem;
   display: block;
   width: 100%;
 }
@@ -90,13 +114,13 @@ button:focus {
   right: 0;
   a {
     display: block;
-    padding: 1.5rem;
+    padding: 1.4rem;
     background: rgba(0,0,0, 0.37);
     &:hover {
       background: #B0B3E7;
     }
     img {
-      height: 4rem;
+      height: 5rem;
       display: block;
     }
   }
@@ -108,6 +132,13 @@ button:focus {
   padding-top: 244px;
   width: 100%;
   overflow: hidden;
+  padding-top: 16rem;
+}
+
+@media screen and (max-width: 317px) {
+  .output-container {
+    padding-top: 22rem;
+  }
 }
 
 .output-container div {
@@ -133,11 +164,12 @@ div.thankyou {
   width: 100%;
   text-align: center;
   transition: bottom 1s ease;
-  padding: 3.5rem;
+  padding: 7.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   bottom: 0;
+  min-height: 50vh;
 }
 
 div.thankyou.hidden {
@@ -163,18 +195,15 @@ div.thankyou a:hover {
 }
 
 .close {
-  padding: 1rem;
+  padding: 1.5rem;
   position: absolute;
-  top: .6rem;
-  right: .6rem;
+  top: 1rem;
+  right: 1rem;
   cursor: pointer;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 5.5rem;
+  width: 5.5rem;
 }
 
-.heart {
-  height: 1.4rem;
-}
 /*waiting animation*/
 
 .waiting span {
@@ -220,25 +249,5 @@ div.thankyou a:hover {
   justify-content: center;
   h1 {
     margin: 0;
-  }
-}
-
-/*responsive design*/
-
-@media screen and (max-width: 880px) {
-  .output-container {
-    padding-top: 153px;
-  }
-}
-
-@media screen and (max-width: 552px) {
-  .output-container {
-    padding-top: 122px;
-  }
-}
-
-@media screen and (max-width: 384px) {
-  .output-container {
-    padding-top: 168px;
   }
 }
