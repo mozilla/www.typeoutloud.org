@@ -22,11 +22,18 @@ var MadLib = React.createClass({
       });
     }
 
+    var abort = false;
+
+    if (process.env.ABORT.indexOf(this.props.page) !== -1) {
+      abort = true;
+    }
+
     return {
-      contextClosed: true,
-      contextFired: false,
+      initContext: this.props.initContext,
+      contextClosed: false,
       paused: false,
       channel,
+      abort,
       writeSheet: writeSheet,
       readSheet: readSheet,
       entry: this.props.sheets.entry,
@@ -88,16 +95,11 @@ var MadLib = React.createClass({
             sheet: this.state.writeSheet,
             entry: this.state.entry
           }, () => {
-            var contextClosed = false;
-            if (this.state.contextFired) {
-              contextClosed = true;
-            }
             this.setState({
               timeOut: window.setTimeout(this.updateOutputTimeout, 4000),
               tempField: value,
               waiting: false,
-              contextClosed,
-              contextFired: true
+              initContext: true
             });
           });
         });
@@ -190,7 +192,8 @@ var MadLib = React.createClass({
           this.state.rows.map(function(row, index) {
             return (
               <div key={"row-" + index}>
-                <a href={href + row.field}>{row.field}</a>
+                {/*<a href={href + row.field}>{row.field}</a>*/}
+                {row.field}
               </div>
             );
           })
@@ -232,8 +235,15 @@ var MadLib = React.createClass({
   },
   render: function() {
     var contextClassName = "thankyou";
-    if (this.state.contextClosed) {
+    if (this.state.contextClosed || !this.state.initContext) {
       contextClassName += " hidden";
+    }
+    if (this.state.abort) {
+      return (
+        <div className="abort">
+          {this.props.abort}
+        </div>
+      );
     }
     return (
       <div>

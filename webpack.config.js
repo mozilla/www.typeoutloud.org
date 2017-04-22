@@ -33,7 +33,8 @@ module.exports = {
       'process.env': JSON.stringify({
         APPLICATION_URI: process.env.APPLICATION_URI,
         DISABLE_INPUT: process.env.DISABLE_INPUT,
-        GA_TRACKING_ID: process.env.GA_TRACKING_ID
+        GA_TRACKING_ID: process.env.GA_TRACKING_ID,
+        ABORT: process.env.ABORT || ""
       })
     }),
     //new webpack.optimize.UglifyJsPlugin(),
