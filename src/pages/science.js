@@ -26,29 +26,29 @@ var Science = React.createClass({
       });
     }
     return (
-      <div className="internethealth-page page">
+      <div className="science-page page">
         <MadLib
-          pageTitle="internethealth"
-          initContext={false}
-          shareProgress="https://share.mozilla.org/352/180435"
-          header="A healthy Internet is ..."
-          placeholder="share your thoughts"
+          pageTitle="Stand up for science"
+          shareProgress="#"
+          header="Stand up for science"
+          placeholder="share your idea"
           channel={channel}
-          page="internethealth"
+          initContext={true}
+          page="science"
           abort={(
-            <p>Thanks for caring about internet health.</p>
+            <p>Thank you for sharing your March for Science slogan ideas! We will design a set of posters from our favorites. Follow us on <a href="https://twitter.com/mozilla">Twitter</a> to see the final products (and then print and share them)!</p>
           )}
           sheets={{
             entry: "822808207",
             write: {
-              email: "1FAIpQLSfP0QdsqNx6xiLg49Iv2_C0HCAjrCRoHOv27znQ-O8rnRy1gg"
+              email: "1FAIpQLSfpus8QLCU9XWuDKtv4YUqudjCHoWdnPG5gUh-5RqpSkbR3aQ"
             },
             read: {
-              email: "1klcqGFj85kTf5IxVLF9rle7hqwlWhHe-mT8tWrxknKE"
+              email: "1seK0ySZrJA3Qo-U0_UwMimmwWJ_slKr0mVeIbCPxuq8"
             }
           }}
         >
-          Thanks for sharing. <span className="logo">mozilla</span> made this because we <i className="fa fa-heart fa-1x" aria-hidden="true"></i> the internet. Help keep it healthy by <a href="https://share.mozilla.org/352/180435">sharing</a> with your friends. Learn more about internet health <a href="https://internethealthreport.org/" onClick={this.shareProgressClick}>here</a>.
+          Support the March for Science by sharing a clever science-themed slogan. We will design a set of posters from our favorites. Follow us on Twitter to see the final products (and then print and share them)!
         </MadLib>
       </div>
     );
