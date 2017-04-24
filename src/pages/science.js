@@ -35,7 +35,8 @@ var Science = React.createClass({
           channel={channel}
           initContext={true}
           page="science"
-          abort={(
+          abort={process.env.ABORT_SCIENCE}
+          abortCopy={(
             <p>Thank you for sharing your March for Science slogan ideas! We will design a set of posters from our favorites. Follow us on <a href="https://twitter.com/mozilla">Twitter</a> to see the final products (and then print and share them)!</p>
           )}
           sheets={{

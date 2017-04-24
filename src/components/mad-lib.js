@@ -22,18 +22,12 @@ var MadLib = React.createClass({
       });
     }
 
-    var abort = false;
-
-    if (process.env.ABORT.indexOf(this.props.page) !== -1) {
-      abort = true;
-    }
-
     return {
       initContext: this.props.initContext,
       contextClosed: false,
       paused: false,
       channel,
-      abort,
+      abort: this.props.abort,
       writeSheet: writeSheet,
       readSheet: readSheet,
       entry: this.props.sheets.entry,
@@ -245,7 +239,7 @@ var MadLib = React.createClass({
     if (this.state.abort) {
       return (
         <div className="abort">
-          {this.props.abort}
+          {this.props.abortCopy}
         </div>
       );
     }

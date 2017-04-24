@@ -6,6 +6,7 @@ var routes = require('./routes');
 var compression = require('compression');
 var helmet = require('helmet');
 var path = require('path');
+var cors = require('cors');
 
 var bodyParser = require('body-parser');
 
@@ -59,6 +60,7 @@ app.use(function(req, res, next){
 app.post('/api/sheets/add/', limiter, routes.sheets.add);
 app.post('/api/sheets/read/', routes.sheets.read);
 
+app.use(cors(), express.static('public/assets'));
 app.use(express.static('public'));
 
 app.get('*', function (request, response) {

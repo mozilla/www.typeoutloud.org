@@ -35,7 +35,8 @@ var Science = React.createClass({
           placeholder="share your thoughts"
           channel={channel}
           page="internethealth"
-          abort={(
+          abort={process.env.ABORT_INTERNETHEALTH}
+          abortCopy={(
             <p>Thanks for caring about internet health.</p>
           )}
           sheets={{
