@@ -3,7 +3,7 @@
 ## For when something goes bad and we need to turn off input.
 
 1. First if Scott is online, you can just ask him. If not, email emergency@mozillafoundation.org
-2. For devs, switch the DISABLE_INPUT env to the route you want to shut down. This redirects the main page to a page with some copy and no input.
+2. For devs, switch the ABORT env to the route you want to shut down. This redirects the main page to a page with some copy and no input. It's a CSV, so if the route "internethealth" needs to be shut down, change it to "internethealth", if science and internethealth need to be shut down, change it to "science, internethealth".
 3. Optional. Disable sheets so it's read only. Do this for each sheet. Do this only after step 1 and 2 are complete.
     1. Go to the sheet.
     2. In the top nav menu, click "Form". It's up there with "File", "Edit", "View", etc.
