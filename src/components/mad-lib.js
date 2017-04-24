@@ -43,7 +43,7 @@ var MadLib = React.createClass({
       scrollPercentages: [0, 25, 50, 75, 100],
       waiting: false,
       rows: [],
-      tempField: "",
+      tempFields: [],
       highlight
     };
   },
@@ -58,7 +58,8 @@ var MadLib = React.createClass({
     callback = callback || function() {};
     sheets.read({
       channel: this.state.channel,
-      sheet: this.state.readSheet
+      sheet: this.state.readSheet,
+      project: this.props.page
     }, (data) => {
 
       var rows = data.rows;
@@ -67,7 +68,7 @@ var MadLib = React.createClass({
         this.setState({
           previousGuid: guid,
           rows,
-          tempField: ""
+          tempFields: []
         });
       }
       callback();
@@ -93,11 +94,12 @@ var MadLib = React.createClass({
           sheets.write({
             field: value,
             sheet: this.state.writeSheet,
-            entry: this.state.entry
+            entry: this.state.entry,
+            project: this.props.page
           }, () => {
             this.setState({
               timeOut: window.setTimeout(this.updateOutputTimeout, 4000),
-              tempField: value,
+              tempFields: [value, ...this.state.tempFields],
               waiting: false,
               initContext: true
             });
@@ -159,7 +161,7 @@ var MadLib = React.createClass({
     });
   },
   renderRows: function() {
-    var tempElement = null;
+    var tempWaiting = null;
     var href = location.origin + location.pathname;
     var search = location.search;
     if (search) {
@@ -169,25 +171,27 @@ var MadLib = React.createClass({
     }
     href += "highlight=";
     if (this.state.waiting) {
-      tempElement = (
+      tempWaiting = (
         <div className="waiting">
           <span>.</span>
           <span>.</span>
           <span>.</span>
         </div>
       );
-    } else if (this.state.tempField) {
-      tempElement = (
-        <div>
-          <a href={href + this.state.tempField}>
-            {this.state.tempField}
-          </a>
-        </div>
-      );
     }
     return (
       <div className="output-container">
-        {tempElement}
+        {tempWaiting}
+        {
+          this.state.tempFields.map(function(field, index) {
+            return (
+              <div key={"row-" + index}>
+                {/*<a href={href + row.field}>{row.field}</a>*/}
+                {field}
+              </div>
+            );
+          })
+        }
         {
           this.state.rows.map(function(row, index) {
             return (
