@@ -34,7 +34,8 @@ module.exports = {
         APPLICATION_URI: process.env.APPLICATION_URI,
         DISABLE_INPUT: process.env.DISABLE_INPUT,
         GA_TRACKING_ID: process.env.GA_TRACKING_ID,
-        ABORT: process.env.ABORT || ""
+        ABORT_INTERNETHEALTH: process.env.ABORT_INTERNETHEALTH || false,
+        ABORT_SCIENCE: process.env.ABORT_SCIENCE || false
       })
     }),
     //new webpack.optimize.UglifyJsPlugin(),
