@@ -17,7 +17,7 @@ var Guid = require('guid');
 var sheets = {
   "add": function(req, res) {
     var field = req.body.field;
-console.log(field);
+
     var entry = "entry." + req.body.entry;
     var url = "https://docs.google.com/a/mozillafoundation.org/forms/d/e/" + req.body.sheet + "/formResponse";
 
@@ -38,7 +38,11 @@ console.log(field);
   },
   "read": function(req, res) {
     var channel = req.body.channel;
-    var rows = cache.get(channel);
+    var project = req.body.project;
+
+    var cacheName = project + "/" + channel;
+
+    var rows = cache.get(cacheName);
     if (typeof rows !== 'undefined') {
       res.json(rows);
       return;
@@ -72,7 +76,7 @@ console.log(field);
           rows: rows
         };
 
-        cache.set(channel, results);
+        cache.set(cacheName, results);
 
         res.json(results);
       }
