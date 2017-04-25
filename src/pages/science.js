@@ -11,20 +11,12 @@ var Science = React.createClass({
     });
   },
   render: function() {
-    var search = location.search;
-    var channel = "email";
-    if (search) {
-      search = search.replace("?", "");
-      search = search.split("&");
-      search.forEach(function(item) {
-        item = item.split("=");
-        if (item[0] === "channel") {
-          if (item[1] === "social" || item[1] === "snippet" || item[1] === "email") {
-            channel = item[1];
-          }
-        }
-      });
+    var query = this.props.location.query;
+    var channel = query.channel;
+    if (channel !== "social" || channel !== "email" || channel !== "snippet") {
+      channel = "email";
     }
+
     return (
       <div className="science-page page">
         <MadLib
