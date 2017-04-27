@@ -256,7 +256,7 @@ var MadLib = React.createClass({
         </div>
         {this.renderRows()}
         <div className={contextClassName}>
-          <i onClick={this.closeContext} className="fa fa-times fa-3x close" aria-hidden="true"></i>
+          <i onClick={this.closeContext} className="fa fa-times fa-4x close" aria-hidden="true"></i>
           <p>
             {this.props.children}
           </p>
