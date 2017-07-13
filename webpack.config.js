@@ -35,7 +35,8 @@ module.exports = {
         DISABLE_INPUT: process.env.DISABLE_INPUT,
         GA_TRACKING_ID: process.env.GA_TRACKING_ID,
         ABORT_INTERNETHEALTH: process.env.ABORT_INTERNETHEALTH || false,
-        ABORT_SCIENCE: process.env.ABORT_SCIENCE || false
+        ABORT_SCIENCE: process.env.ABORT_SCIENCE || false,
+        ABORT_NET_NEUTRALITY: process.env.ABORT_NET_NEUTRALITY || false
       })
     }),
     //new webpack.optimize.UglifyJsPlugin(),
@@ -47,4 +48,3 @@ module.exports = {
     })
   ]
 };
-
