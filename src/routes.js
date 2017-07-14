@@ -6,7 +6,8 @@ import { Route, IndexRedirect, Redirect } from 'react-router';
 
 var routes = (
   <Route path="/">
-    <IndexRedirect to='internethealth'/>
+    <IndexRedirect to='net-neutrality'/>
+    <Route path='net-neutrality' component={require('./pages/net-neutrality.js')}/>
     <Route path='internethealth' component={require('./pages/internethealth.js')}/>
     <Route path='science' component={require('./pages/science.js')}/>
     <Redirect from="*" to="/" />
@@ -14,4 +15,3 @@ var routes = (
 );
 
 module.exports = routes;
-
