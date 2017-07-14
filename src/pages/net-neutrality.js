@@ -18,7 +18,7 @@ var Science = React.createClass({
       <div className="net-neutrality-page page">
         <MadLib
           pageTitle="Stand up for Net Neutrality"
-          shareProgress="#"
+          shareProgress="http://share.mozilla.org/352/181993"
           header="Without Net Neutrality ..."
           placeholder="share your thoughts"
           channel="email"
