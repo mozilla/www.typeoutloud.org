@@ -26,7 +26,7 @@ var Science = React.createClass({
           page="net-neutrality"
           abort={process.env.ABORT_NET_NEUTRALITY}
           abortCopy={(
-            <p>Thank you for sharing your ideas! We'll be creating a set of posters from our favorites soon. Follow us on Facebook, Twitter or Medium to see the final results (and then print and share them)!</p>
+            <p>Thank you for sharing your ideas! We'll be creating a set of posters from our favorites soon. Follow us on <a href="https://www.facebook.com/mozilla">Facebook</a>, <a href="https://twitter.com/mozilla">Twitter</a> or <a href="https://medium.com/@mozilla">Medium</a> to see the final results (and then print and share them)!</p>
           )}
           sheets={{
             entry: "822808207",
@@ -38,7 +38,7 @@ var Science = React.createClass({
             }
           }}
         >
-          What would the Internet be without Net Neutrality? Share your ideas and we'll turn some favorites into a set of posters you can print or share on social media. Follow us on Facebook, Twitter or Medium to see the final results!
+          What would the Internet be without Net Neutrality? Share your ideas and we'll turn some favorites into a set of posters you can print or share on social media. Follow us on <a href="https://www.facebook.com/mozilla">Facebook</a>, <a href="https://twitter.com/mozilla">Twitter</a> or <a href="https://medium.com/@mozilla">Medium</a> to see the final results!
         </MadLib>
       </div>
     );
